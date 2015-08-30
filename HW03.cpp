@@ -54,7 +54,9 @@ int main()
 		midvec.insert(midvec.end(), tomid.begin(), tomid.end());
 		botvec.insert(botvec.end(), tobot.begin(), tobot.end());
 	}
-
+	//replaces blank with token depending on move(in progress)
+	midvec[2*moves] = "@";
+	
 	//prints the board
 	vprint(topvec);
 	cout << endl;
