@@ -22,6 +22,15 @@ int main()
 	bool player = true;
 	cout << "Please enter the number of cells...";
 	cin >> boardsize;
+	if(player == true){
+		cout << "Please enter number of tiles to move, Player 1.";
+		cin >> moves;
+		player = false;
+	}else{
+		cout << "Please enter number of tiles to move, Player 2.";
+		cin >> moves;
+		player = true;
+	}
 
 	//total board
 	vector<string> topvec = { "+", "-", "+" };
