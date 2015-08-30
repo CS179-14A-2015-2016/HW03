@@ -18,6 +18,8 @@ int main()
 	//variable initialize
 	int boardsize;
 	int pbuffer;
+	int moves;
+	bool player = true;
 	cout << "Please enter the number of cells...";
 	cin >> boardsize;
 
