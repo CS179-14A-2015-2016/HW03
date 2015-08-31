@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <random>
 
 using namespace std;
 
@@ -13,24 +14,49 @@ void vprint(vector<string> & v)
 	}
 }
 
+//determines what value would be in the step if ever 
+int steprand(int& boardsize)
+{
+	int spaces = boardsize/2;
+	random_device ran;
+	mt19937 dev(ran());
+	uniform_int_distribution<> dis(-spaces, spaces);
+
+	return dis(dev);
+}
+
+//determines if a tile will have a random value or not
+bool tilerand()
+{
+	random_device randev;
+	mt19937 gen(randev());
+	uniform_real_distribution<> dis(0,1);
+
+	if (dis(gen) > 0.7)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
 int main()
 {
 	//variable initialize
 	int boardsize;
-	int pbuffer;
-	int moves;
-	bool player = true;
+	int pbuffer; //pausebuffer
+	int winner = 0; //endcheck
+	int tokenhold;
+	int tplace = 1;
+	int n;
+	int onep;
+	int twop;
+
+	//boardsize input
 	cout << "Please enter the number of cells...";
 	cin >> boardsize;
-	if(player == true){
-		cout << "Please enter number of tiles to move, Player 1.";
-		cin >> moves;
-		player = false;
-	}else{
-		cout << "Please enter number of tiles to move, Player 2.";
-		cin >> moves;
-		player = true;
-	}
 
 	//total board
 	vector<string> topvec = { "+", "-", "+" };
@@ -54,9 +80,10 @@ int main()
 		midvec.insert(midvec.end(), tomid.begin(), tomid.end());
 		botvec.insert(botvec.end(), tobot.begin(), tobot.end());
 	}
-	//replaces blank with token depending on move(in progress)
-	midvec[2*moves] = "@";
-	
+
+	//inserts token to start
+	midvec[tplace] = "@";
+
 	//prints the board
 	vprint(topvec);
 	cout << endl;
@@ -65,6 +92,41 @@ int main()
 	vprint(botvec);
 	cout << endl;
 
+	//calls the rand functions
+	for (int i = 0; i < 20; i++)
+	{
+	
+		if (tilerand() == true)
+		{
+			cout << "Tilerands: " << tilerand() << " " << endl;
+			cout << "Steprands: " << steprand(boardsize) << " " << endl << endl;
+		}
+		else
+		{
+			cout << "Steprands: 0" << endl << endl;
+		}
+		
+	}
+
+	/*
+	while (winner != 1)
+	{
+		cout << "Enter first move: ";
+		cin >> onep;
+
+		n = tplace + onep * 2;
+		tplace = n;
+		midvec[tplace] = "@";
+
+		//prints the board
+		vprint(topvec);
+		cout << endl;
+		vprint(midvec);
+		cout << endl;
+		vprint(botvec);
+		cout << endl;
+	}
+	*/
 
 	//pause buffer
 	cin >> pbuffer;
