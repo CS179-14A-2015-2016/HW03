@@ -54,10 +54,25 @@ int main()
 	int onep;
 	int twop;
 
+	//token motion
+	int moves;
+	bool player = true;
+
 	//boardsize input
 	cout << "Please enter the number of cells...";
 	cin >> boardsize;
 
+	//input movement
+	if(player == true){
+		cout << "Please enter number of tiles to move, Player 1.";
+		cin >> moves;
+		player = false;
+	}else{
+		cout << "Please enter number of tiles to move, Player 2.";
+		cin >> moves;
+		player = true;
+	}
+	
 	//total board
 	vector<string> topvec = { "+", "-", "+" };
 	vector<string> midvec = { "|", " " ,"|" };
@@ -81,8 +96,11 @@ int main()
 		botvec.insert(botvec.end(), tobot.begin(), tobot.end());
 	}
 
-	//inserts token to start
-	midvec[tplace] = "@";
+	//inserts token to start and makes first move
+	midvec[tplace] = " ";
+	tplace += (2 * moves);
+	midvec[tplace] = "@"
+	
 
 	//prints the board
 	vprint(topvec);
