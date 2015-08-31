@@ -62,17 +62,6 @@ int main()
 	cout << "Please enter the number of cells...";
 	cin >> boardsize;
 
-	//input movement
-	if(player == true){
-		cout << "Please enter number of tiles to move, Player 1.";
-		cin >> moves;
-		player = false;
-	}else{
-		cout << "Please enter number of tiles to move, Player 2.";
-		cin >> moves;
-		player = true;
-	}
-	
 	//total board
 	vector<string> topvec = { "+", "-", "+" };
 	vector<string> midvec = { "|", " " ,"|" };
@@ -97,10 +86,7 @@ int main()
 	}
 
 	//inserts token to start and makes first move
-	midvec[tplace] = " ";
-	tplace += (2 * moves);
-	midvec[tplace] = "@"
-	
+	midvec[tplace] = "a";
 
 	//prints the board
 	vprint(topvec);
@@ -126,15 +112,23 @@ int main()
 		
 	}
 
-	/*
+		/*
 	while (winner != 1)
 	{
-		cout << "Enter first move: ";
-		cin >> onep;
-
-		n = tplace + onep * 2;
-		tplace = n;
-		midvec[tplace] = "@";
+		//input movement
+		if(player == true){
+			cout << "Please enter number of tiles to move, Player 1.";
+			cin >> moves;
+			player = false;
+		}else{
+			cout << "Please enter number of tiles to move, Player 2.";
+			cin >> moves;
+			player = true;
+	}
+		
+		midvec[tplace] = " ";
+		tplace += (2 * moves);
+		midvec[tplace] = "@"
 
 		//prints the board
 		vprint(topvec);
