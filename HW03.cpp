@@ -57,7 +57,8 @@ int main()
 	//token motion
 	int moves;
 	bool player = true;
-
+	int randomValue = 0;
+	
 	//boardsize input
 	cout << "Please enter the number of cells...";
 	cin >> boardsize;
@@ -125,6 +126,20 @@ int main()
 			cin >> moves;
 			player = true;
 	}
+	
+	if (tilerand() == true) {
+
+		randomValue = steprand();
+	}
+	else {
+		randomValue = 0;
+
+	}	
+		midvec[tplace] = " ";
+		tplace += (2 * moves) + randomValue;
+		randomValue = 0;
+		midvec[tplace] = "@"
+
 		
 		midvec[tplace] = " ";
 		tplace += (2 * moves);
