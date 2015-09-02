@@ -17,7 +17,7 @@ void vprint(vector<string> & v)
 //determines what value would be in the step if ever 
 int steprand(int& boardsize)
 {
-	int spaces = boardsize/2;
+	int spaces = boardsize / 2;
 	random_device ran;
 	mt19937 dev(ran());
 	uniform_int_distribution<> dis(-spaces, spaces);
@@ -30,7 +30,7 @@ bool tilerand()
 {
 	random_device randev;
 	mt19937 gen(randev());
-	uniform_real_distribution<> dis(0,1);
+	uniform_real_distribution<> dis(0, 1);
 
 	if (dis(gen) > 0.7)
 	{
@@ -48,19 +48,18 @@ int main()
 	int boardsize;
 	int pbuffer; //pausebuffer
 	int winner = 0; //endcheck
-	int tokenhold;
+					//int tokenhold;
 	int tplace = 1;
-	int n;
-	int onep;
-	int twop;
+	int wintile;
+	//	int endtile;
 
 	//token motion
 	int moves;
 	bool player = true;
-	int randomValue = 0;
-	
+	//	int randomValue = 0;
+
 	//boardsize input
-	cout << "Please enter the number of cells...";
+	cout << "Please enter the number of cells... ";
 	cin >> boardsize;
 
 	//total board
@@ -86,8 +85,8 @@ int main()
 		botvec.insert(botvec.end(), tobot.begin(), tobot.end());
 	}
 
-	//inserts token to start and makes first move
-	midvec[tplace] = "a";
+	//inserts token to start
+	midvec[tplace] = "@";
 
 	//prints the board
 	vprint(topvec);
@@ -97,53 +96,52 @@ int main()
 	vprint(botvec);
 	cout << endl;
 
-	//calls the rand functions
-	for (int i = 0; i < 20; i++)
-	{
-	
-		if (tilerand() == true)
-		{
-			cout << "Tilerands: " << tilerand() << " " << endl;
-			cout << "Steprands: " << steprand(boardsize) << " " << endl << endl;
-		}
-		else
-		{
-			cout << "Steprands: 0" << endl << endl;
-		}
-		
-	}
+	//initiliaze winning tile
+	wintile = (boardsize * 2) - 1;
 
-		/*
 	while (winner != 1)
 	{
 		//input movement
-		if(player == true){
-			cout << "Please enter number of tiles to move, Player 1.";
+		if (player == true) {
+			cout << "Please enter number of tiles to move, Player 1: ";
 			cin >> moves;
 			player = false;
-		}else{
-			cout << "Please enter number of tiles to move, Player 2.";
+		}
+		else {
+			cout << "Please enter number of tiles to move, Player 2: ";
 			cin >> moves;
 			player = true;
-	}
-	
-	if (tilerand() == true) {
+		}
 
-		randomValue = steprand();
-	}
-	else {
-		randomValue = 0;
 
-	}	
+		/*while (moves != 0)
+		{
 		midvec[tplace] = " ";
-		tplace += (2 * moves) + randomValue;
-		randomValue = 0;
-		midvec[tplace] = "@"
+		tplace += 2;
 
-		
-		midvec[tplace] = " ";
-		tplace += (2 * moves);
-		midvec[tplace] = "@"
+		//bounceback condition
+
+		if ()
+		{
+
+		}
+
+		//end of bounceback
+
+		midvec[tplace] = "@";
+		moves--;
+		}
+		*/
+		if ((tplace + (2 * moves)) > (midvec.size() - 2)) {
+			midvec[tplace] = " ";
+			tplace = tplace + ((2 * moves) - ((midvec.size() - 2) - tplace+2 ));
+			midvec[tplace] = "@";
+		}
+		else {
+			midvec[tplace] = " ";
+			tplace += (2 * moves);
+			midvec[tplace] = "@";
+		}
 
 		//prints the board
 		vprint(topvec);
@@ -152,11 +150,60 @@ int main()
 		cout << endl;
 		vprint(botvec);
 		cout << endl;
+
+		if (midvec.at(wintile) == "@")
+		{
+			winner = 1;
+		}
+		else
+		{
+			winner = 0;
+		}
+
 	}
-	*/
+
+	if (player == false)
+	{
+		cout << "Player 1 wins.";
+	}
+	else
+	{
+		cout << "Player 2 wins.";
+	}
 
 	//pause buffer
 	cin >> pbuffer;
 
 	return EXIT_SUCCESS;
 }
+
+//------------------TESTCODES------------------------------
+
+//calls the rand functions for testing
+/*
+for (int i = 0; i < 20; i++)
+{
+
+if (tilerand() == true)
+{
+cout << "Tilerands: " << tilerand() << " " << endl;
+cout << "Steprands: " << steprand(boardsize) << " " << endl << endl;
+}
+else
+{
+cout << "Steprands: 0" << endl << endl;
+}
+
+}
+*/
+
+
+//rand value inside tiles
+/*
+if (tilerand() == true) {
+randomValue = steprand(boardsize);
+}
+else {
+randomValue = 0;
+}
+*/
