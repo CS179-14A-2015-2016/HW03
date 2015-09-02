@@ -162,7 +162,7 @@ int main()
 		else if ((tplace + (2* moves)) > (midvec.size() - 2))
 		{
 			midvec[tplace] = curhold;
-			tplace = tplace + ((2 * moves) - ((midvec.size() - 2) - tplace + 2));
+			tplace = (midvec.size() - 2)-((tplace + (2 * moves))- (midvec.size() - 2));
 			futhold = midvec[tplace];
 			curhold = futhold;
 			midvec[tplace] = " @ ";
