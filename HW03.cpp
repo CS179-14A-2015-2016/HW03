@@ -84,7 +84,7 @@ int main()
 		midvec.insert(midvec.end(), tomid.begin(), tomid.end());
 		botvec.insert(botvec.end(), tobot.begin(), tobot.end());
 	}
-
+/*
 	int vecplace = 3;
 
 	for (int count2 = 0; count2 < boardsize-2; count2++)
@@ -112,7 +112,7 @@ int main()
 
 		vecplace += 2;
 	}
-
+*/
 	//inserts token to start
 	midvec[tplace] = " @";
 
@@ -169,6 +169,7 @@ int main()
 		else if ((tplace + (2 * moves)) > (midvec.size() - 2)) {
 			midvec[tplace] = " ";
 			tplace = tplace + ((2 * moves) - ((midvec.size() - 2) - tplace+2 ));
+			//tplace = tplace + (((2*moves)+tplace-(midvec.size() - 2))/2)-1;
 			midvec[tplace] = "@";
 		}
 		else {
