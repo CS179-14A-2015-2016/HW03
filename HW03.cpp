@@ -85,8 +85,37 @@ int main()
 		botvec.insert(botvec.end(), tobot.begin(), tobot.end());
 	}
 
+	int vecplace = 3;
+
+	for (int count2 = 0; count2 < boardsize-2; count2++)
+	{
+		int temp = static_cast <unsigned int>(steprand(boardsize)); //stores rand value
+		string strtemp = to_string(temp);
+		string strtemp2 = strtemp;
+
+		if (tilerand() == true)
+		{
+			if (strtemp.front() = '-')
+			{
+				midvec[vecplace] = strtemp2;
+			}
+			else
+			{
+				midvec[vecplace] = strtemp2.insert(0, 1, ' ');
+			}
+
+		}
+		else
+		{
+			midvec[vecplace] = "  ";
+		}
+
+		vecplace += 2;
+	}
+
 	//inserts token to start
-	midvec[tplace] = "@";
+	midvec[tplace] = " @";
+
 
 	//prints the board
 	vprint(topvec);
