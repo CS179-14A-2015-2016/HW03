@@ -123,6 +123,14 @@ int main()
 	midvec[tplace] = " @ ";
 
 	//prints the board
+	if(boardsize%2==1)
+	{
+	cout<< "Enter a value from 1 to " << ceil(boardsize/2)+1<<endl;
+	}
+	else
+	{
+	cout<< "Enter a value from 1 to " << ceil(boardsize/2)<<endl;
+	}
 	vprint(topvec);
 	cout << endl;
 	vprint(midvec);
@@ -151,17 +159,35 @@ int main()
             		cout << "a> ";
 			cin >> moves;
 			}
-			while(moves > (boardsize/2)+1)
+			while(moves > ceil(boardsize/2)+1)
 			{
-			cout << "Please enter a value less than "<<(boardsize/2)+1<<endl ;
-			cout << "a> ";
-			cin >> moves;
+				if(boardsize%2==1)
+				{
+				cout<< "Please enter a POSITIVE integer less than " << ceil(boardsize/2)+2<<endl;
+				cout << "a> ";
+				cin >> moves;
+				}
+				else
+				{
+				cout<< "Please enter a POSITIVE integer less than " << ceil(boardsize/2)<<endl;
+				cout << "a> ";
+				cin >> moves;
+				}
 			}
 			while(moves < 1)
 			{
-			cout << "Please enter a POSITIVE integer less than "<<(boardsize/2)+1<<endl ;
-			cout << "a> ";
-			cin >> moves;
+				if(boardsize%2==1)
+				{
+				cout<< "Please enter a POSITIVE integer less than " << ceil(boardsize/2)+2<<endl;
+				cout << "a> ";
+				cin >> moves;
+				}
+				else
+				{
+				cout<< "Please enter a POSITIVE integer less than " << ceil(boardsize/2)<<endl;
+				cout << "a> ";
+				cin >> moves;
+				}
 			}
 			player = false;
 		}
@@ -177,17 +203,35 @@ int main()
             		cout << "b> ";
 			cin >> moves;
 			}
-			while(moves > (boardsize/2)+1)
+			while(moves > ceil(boardsize/2)+1)
 			{
-			cout << "Please enter a value less than "<<(boardsize/2)+1<<endl ;
-			cout << "b> ";
-			cin >> moves;
+				if(boardsize%2==1)
+				{
+				cout<< "Please enter a POSITIVE integer less than " << ceil(boardsize/2)+2<<endl;
+				cout << "b> ";
+				cin >> moves;
+				}
+				else
+				{
+				cout<< "Please enter a POSITIVE integer less than " << ceil(boardsize/2)<<endl;
+				cout << "b> ";
+				cin >> moves;
+				}
 			}
 			while(moves < 1)
 			{
-			cout << "Please enter a POSITIVE integer less than "<<(boardsize/2)+1<<endl ;
-			cout << "b> ";
-			cin >> moves;
+				if(boardsize%2==1)
+				{
+				cout<< "Please enter a POSITIVE integer less than " << ceil(boardsize/2)+2<<endl;
+				cout << "b> ";
+				cin >> moves;
+				}
+				else
+				{
+				cout<< "Please enter a POSITIVE integer less than " << ceil(boardsize/2)<<endl;
+				cout << "b> ";
+				cin >> moves;
+				}
 			}
 			player = true;
 		}
