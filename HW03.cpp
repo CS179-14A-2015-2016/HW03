@@ -235,7 +235,7 @@ int main()
 			player = true;
 		}
 
-		//bounceback movement
+		//bounceback movement 
 		if ((tplace + (2 * moves)) < 1) 
 		{
 			midvec[tplace] = curhold;
@@ -265,30 +265,32 @@ int main()
 			curhold = futhold;
 			midvec[tplace] = " @ ";
 			}
-			else{
-			midvec[tplace] = curhold;
-			tplace += (2 * moves);
-			tplace = tplace+2*stoi(midvec[future]);
-			if(tplace<1)
+			else
 			{
-			tplace = ((tplace * -1) + 2);
-			futhold = midvec[tplace];
-			curhold = futhold;
-			midvec[tplace] = " @ ";
+				midvec[tplace] = curhold;
+				tplace += (2 * moves);
+				tplace = tplace+2*stoi(midvec[future]);
+				if(tplace<1)
+				{
+				tplace = ((tplace * -1) + 2);
+				futhold = midvec[tplace];
+				curhold = futhold;
+				midvec[tplace] = " @ ";
+				}
+				else if(tplace > (midvec.size() - 2))
+				{
+				tplace = (midvec.size() - 2)-((tplace)- (midvec.size() - 2));
+				futhold = midvec[tplace];
+				curhold = futhold;
+				midvec[tplace] = " @ ";
+				}
+				else
+				{
+				futhold = midvec[tplace];
+				curhold = futhold;
+				midvec[tplace] = " @ ";
+				}
 			}
-			else if(tplace > (midvec.size() - 2))
-			{
-			tplace = (midvec.size() - 2)-((tplace)- (midvec.size() - 2));
-			futhold = midvec[tplace];
-			curhold = futhold;
-			midvec[tplace] = " @ ";
-			}
-			else{
-			futhold = midvec[tplace];
-			curhold = futhold;
-			midvec[tplace] = " @ ";
-			}
-		}
 		}
 
 
@@ -300,6 +302,7 @@ int main()
 		vprint(botvec);
 		cout << endl;
 
+		//winnercheck
 		if (midvec.at(wintile) == " @ ")
 		{
 			winner = 1;
@@ -311,6 +314,7 @@ int main()
 
 	}
 
+	//winner display
 	if (player == false)
 	{
 		cout << "Player a wins.";
@@ -325,60 +329,3 @@ int main()
 
 	return EXIT_SUCCESS;
 }
-
-//------------------TESTCODES------------------------------
-
-//calls the rand functions for testing
-/*
-for (int i = 0; i < 20; i++)
-{
-
-if (tilerand() == true)
-{
-cout << "Tilerands: " << tilerand() << " " << endl;
-cout << "Steprands: " << steprand(boardsize) << " " << endl << endl;
-}
-else
-{
-cout << "Steprands: 0" << endl << endl;
-}
-
-}
-*/
-
-
-//rand value inside tiles
-/*
-if (tilerand() == true) {
-randomValue = steprand(boardsize);
-}
-else {
-randomValue = 0;
-}
-*/
-
-//psuedo move code
-/*
-while (moves != 0)
-{
-midvec[tplace] = " ";
-tplace += 2;
-
-//bounceback condition
-/*
-if ()
-{
-
-}
-
-//end of bounceback
-
-midvec[tplace] = "@";
-moves--;
-}
-
-
-midvec[tplace] = " ";
-tplace += (2 * moves);
-midvec[tplace] = "@";
-*/
