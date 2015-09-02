@@ -53,6 +53,8 @@ int main()
 	int tplace = 1;
 	int wintile;
 	int endtile;
+	int lowerlimit;
+	int upperlimit;
 	
 	//advanced mechanics
 	int future; //next move index
@@ -65,7 +67,34 @@ int main()
 	//boardsize input
 	cout << "Please enter the number of cells... ";
 	cin >> boardsize;
-
+	while(cin.fail())
+	{
+	cout << "Invalid input."<<endl;
+	cin.clear();
+	cin.ignore(numeric_limits<streamsize>::max(), '\n');
+	cout << "Please enter the number of cells... ";
+	cin >> boardsize;
+	}
+	cout << "a>";
+	cin >> lowerlimit;
+	while(cin.fail())
+	{
+	cout << "Invalid input."<<endl;
+	cin.clear();
+	cin.ignore(numeric_limits<streamsize>::max(), '\n');
+	cout << "Please enter a valid integer."<<endl<<"a>";
+	cin >> lowerlimit;
+	}
+	cout << "b>";
+	cin >> upperlimit;
+	while(cin.fail())
+	{
+	cout << "Invalid input."<<endl;
+	cin.clear();
+	cin.ignore(numeric_limits<streamsize>::max(), '\n');
+	cout << "Please enter a valid integer."<<endl<<"b>";
+	cin >> upperlimit;
+	}
 	//total board
 	vector<string> topvec = { "+", " - ", "+" };
 	vector<string> midvec = { "|", "   ", "|" };
@@ -126,14 +155,7 @@ int main()
 	midvec[tplace] = " @ ";
 
 	//prints the board
-	if(boardsize%2==1)
-	{
-	cout<< "Enter a value from 1 to " << ceil(boardsize/2)+1<<endl;
-	}
-	else
-	{
-	cout<< "Enter a value from 1 to " << ceil(boardsize/2)<<endl;
-	}
+	cout<< "Enter a value from "<<lowerlimit<<" to " << upperlimit<<endl;
 	vprint(topvec);
 	cout << endl;
 	vprint(midvec);
@@ -156,41 +178,23 @@ int main()
 			cin >> moves;
 			while(cin.fail())
 			{
-			cout << "Invalid input. Please enter a positive integer."<<endl;
-			cin.clear();
-			cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            		cout << "a> ";
-			cin >> moves;
+				cout << "Invalid input."<<endl<< "Enter a value from "<<lowerlimit<<" to " << upperlimit<<endl;
+				cin.clear();
+				cin.ignore(numeric_limits<streamsize>::max(), '\n');
+				cout << "a> ";
+				cin >> moves;
 			}
-			while(moves > ceil(boardsize/2)+1)
+			while(moves > upperlimit)
 			{
-				if(boardsize%2==1)
-				{
-				cout<< "Please enter a POSITIVE integer less than " << ceil(boardsize/2)+2<<endl;
+				cout<< "Enter a value from "<<lowerlimit<<" to " << upperlimit<<endl;
 				cout << "a> ";
 				cin >> moves;
-				}
-				else
-				{
-				cout<< "Please enter a POSITIVE integer less than " << ceil(boardsize/2)<<endl;
-				cout << "a> ";
-				cin >> moves;
-				}
 			}
-			while(moves < 1)
+			while(moves < lowerlimit)
 			{
-				if(boardsize%2==1)
-				{
-				cout<< "Please enter a POSITIVE integer less than " << ceil(boardsize/2)+2<<endl;
+				cout<< "Enter a value from "<<lowerlimit<<" to " << upperlimit<<endl;
 				cout << "a> ";
 				cin >> moves;
-				}
-				else
-				{
-				cout<< "Please enter a POSITIVE integer less than " << ceil(boardsize/2)<<endl;
-				cout << "a> ";
-				cin >> moves;
-				}
 			}
 			player = false;
 		}
@@ -200,41 +204,23 @@ int main()
 			cin >> moves;
 			while(cin.fail())
 			{
-			cout << "Invalid input. Please enter a positive integer."<<endl;
-			cin.clear();
-			cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            		cout << "b> ";
-			cin >> moves;
+				cout << "Invalid input."<<endl<< "Enter a value from "<<lowerlimit<<" to " << upperlimit<<endl;
+				cin.clear();
+				cin.ignore(numeric_limits<streamsize>::max(), '\n');
+				cout << "b> ";
+				cin >> moves;
 			}
-			while(moves > ceil(boardsize/2)+1)
+			while(moves > upperlimit)
 			{
-				if(boardsize%2==1)
-				{
-				cout<< "Please enter a POSITIVE integer less than " << ceil(boardsize/2)+2<<endl;
+				cout<< "Enter a value from "<<lowerlimit<<" to " << upperlimit<<endl;
 				cout << "b> ";
 				cin >> moves;
-				}
-				else
-				{
-				cout<< "Please enter a POSITIVE integer less than " << ceil(boardsize/2)+1<<endl;
-				cout << "b> ";
-				cin >> moves;
-				}
 			}
-			while(moves < 1)
+			while(moves < lowerlimit)
 			{
-				if(boardsize%2==1)
-				{
-				cout<< "Please enter a POSITIVE integer less than " << ceil(boardsize/2)+2<<endl;
+				cout<< "Enter a value from "<<lowerlimit<<" to " << upperlimit<<endl;
 				cout << "b> ";
 				cin >> moves;
-				}
-				else
-				{
-				cout<< "Please enter a POSITIVE integer less than " << ceil(boardsize/2)+1<<endl;
-				cout << "b> ";
-				cin >> moves;
-				}
 			}
 			player = true;
 		}
