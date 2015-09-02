@@ -216,7 +216,7 @@ int main()
 				}
 				else
 				{
-				cout<< "Please enter a POSITIVE integer less than " << ceil(boardsize/2)<<endl;
+				cout<< "Please enter a POSITIVE integer less than " << ceil(boardsize/2)+1<<endl;
 				cout << "b> ";
 				cin >> moves;
 				}
@@ -231,7 +231,7 @@ int main()
 				}
 				else
 				{
-				cout<< "Please enter a POSITIVE integer less than " << ceil(boardsize/2)<<endl;
+				cout<< "Please enter a POSITIVE integer less than " << ceil(boardsize/2)+1<<endl;
 				cout << "b> ";
 				cin >> moves;
 				}
@@ -240,24 +240,13 @@ int main()
 		}
 
 		//bounceback movement
-		if ((tplace + (2 * moves)) < 1) {
-			future = tplace + 2*moves;
-			if (midvec[future] == "   ")
-			{
+		if ((tplace + (2 * moves)) < 1) 
+		{
 			midvec[tplace] = curhold;
 			tplace = (((tplace + (2 * moves)) * -1) + 2);
 			futhold = midvec[tplace];
 			curhold = futhold;
 			midvec[tplace] = " @ ";
-			}
-			else{
-			midvec[tplace] = curhold;
-			tplace = (((tplace + (2 * moves)) * -1) + 2);
-			tplace = tplace +2*stoi(midvec[future]);
-			futhold = midvec[tplace];
-			curhold = futhold;
-			midvec[tplace] = " @ ";
-			}
 		}
 		else if ((tplace + (2* moves)) > (midvec.size() - 2))
 		{	
@@ -284,10 +273,26 @@ int main()
 			midvec[tplace] = curhold;
 			tplace += (2 * moves);
 			tplace = tplace+2*stoi(midvec[future]);
+			if(tplace<1)
+			{
+			tplace = ((tplace * -1) + 2);
 			futhold = midvec[tplace];
 			curhold = futhold;
 			midvec[tplace] = " @ ";
 			}
+			else if(tplace > (midvec.size() - 2))
+			{
+			tplace = (midvec.size() - 2)-((tplace)- (midvec.size() - 2));
+			futhold = midvec[tplace];
+			curhold = futhold;
+			midvec[tplace] = " @ ";
+			}
+			else{
+			futhold = midvec[tplace];
+			curhold = futhold;
+			midvec[tplace] = " @ ";
+			}
+		}
 		}
 
 
