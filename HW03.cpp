@@ -238,27 +238,63 @@ int main()
 
 		//bounceback movement
 		if ((tplace + (2 * moves)) < 1) {
+			future = tplace + 2*moves;
+			if (midvec[future] == "   ")
+			{
 			midvec[tplace] = curhold;
 			tplace = (((tplace + (2 * moves)) * -1) + 2);
 			futhold = midvec[tplace];
 			curhold = futhold;
 			midvec[tplace] = " @ ";
-		}
-		else if ((tplace + (2* moves)) > (midvec.size() - 2))
-		{
+			}
+			else{
 			midvec[tplace] = curhold;
-			tplace = (midvec.size() - 2)-((tplace + (2 * moves))- (midvec.size() - 2));
+			tplace = (((tplace + (2 * moves)) * -1) + 2);
+			tplace = tplace +2*stoi(midvec[future]);
 			futhold = midvec[tplace];
 			curhold = futhold;
 			midvec[tplace] = " @ ";
+			}
+		}
+		else if ((tplace + (2* moves)) > (midvec.size() - 2))
+		{	
+			future = tplace + 2*moves;
+			if (midvec[future] == "   ")
+			{
+			midvec[tplace] = curhold;
+			tplace = (midvec.size() - 2)-(tplace + (2 * moves));
+			futhold = midvec[tplace];
+			curhold = futhold;
+			midvec[tplace] = " @ ";
+			}
+			else{
+			midvec[tplace] = curhold;
+			tplace = (midvec.size() - 2)-((tplace + (2 * moves))- (midvec.size() - 2));
+			tplace = tplace+2*stoi(midvec[future]);
+			futhold = midvec[tplace];
+			curhold = futhold;
+			midvec[tplace] = " @ ";
+			}
 		}
 		else
 		{
+			future = tplace + 2*moves;
+			if (midvec[future] == "   ")
+			{
 			midvec[tplace] = curhold;
 			tplace += (2 * moves);
 			futhold = midvec[tplace];
 			curhold = futhold;
 			midvec[tplace] = " @ ";
+			}
+			else{
+			midvec[tplace] = curhold;
+			tplace += (2 * moves);
+			tplace = tplace+2*stoi(midvec[future]);
+			futhold = midvec[tplace];
+			curhold = futhold;
+			midvec[tplace] = " @ ";
+			}
 		}
 
 
