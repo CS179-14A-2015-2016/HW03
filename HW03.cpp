@@ -95,6 +95,16 @@ int main()
 	cout << "Please enter a valid integer."<<endl<<"b>";
 	cin >> upperlimit;
 	}
+	while(upperlimit < lowerlimit)
+	{
+	cout << "Please enter a number larger than "<< lowerlimit << "." <<endl<<"b>";
+	cin >> upperlimit;
+	}
+	while(upperlimit>(boardsize/2))
+	{
+	cout << "Please enter a number no greater than "<< (boardsize/2) << "." <<endl<<"b>";
+	cin >> upperlimit;
+	}
 	//total board
 	vector<string> topvec = { "+", " - ", "+" };
 	vector<string> midvec = { "|", "   ", "|" };
