@@ -261,23 +261,13 @@ int main()
 		}
 		else if ((tplace + (2* moves)) > (midvec.size() - 2))
 		{	
-			future = tplace + 2*moves;
-			if (midvec[future] == "   ")
-			{
-			midvec[tplace] = curhold;
-			tplace = (midvec.size() - 2)-(tplace + (2 * moves));
-			futhold = midvec[tplace];
-			curhold = futhold;
-			midvec[tplace] = " @ ";
-			}
-			else{
+		
 			midvec[tplace] = curhold;
 			tplace = (midvec.size() - 2)-((tplace + (2 * moves))- (midvec.size() - 2));
-			tplace = tplace+2*stoi(midvec[future]);
 			futhold = midvec[tplace];
 			curhold = futhold;
 			midvec[tplace] = " @ ";
-			}
+			
 		}
 		else
 		{
