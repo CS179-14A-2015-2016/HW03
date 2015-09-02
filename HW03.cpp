@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include <random>
+#include <limits>
 
 using namespace std;
 
@@ -142,12 +143,40 @@ int main()
 		{
 			cout << "a> ";
 			cin >> moves;
+			while(cin.fail())
+			{
+			cout << "Invalid input. Please enter a positive integer."<<endl;
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            		cout << "a> ";
+			cin >> moves;
+			}
+			while(moves > midvec.size())
+			{
+			cout << "Please enter a value less than "<<midvec.size()<<endl ;
+			cout << "a> ";
+			cin >> moves;
+			}
 			player = false;
 		}
 		else
 		{
 			cout << "b> ";
 			cin >> moves;
+			while(cin.fail())
+			{
+			cout << "Invalid input. Please enter a positive integer."<<endl;
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            		cout << "b> ";
+			cin >> moves;
+			}
+			while(moves > midvec.size())
+			{
+			cout << "Please enter a value less than "<<midvec.size()<<endl ;
+			cout << "b> ";
+			cin >> moves;
+			}
 			player = true;
 		}
 
