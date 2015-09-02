@@ -53,6 +53,9 @@ int main()
 	int tplace = 1;
 	int wintile;
 	int endtile;
+	
+	//advanced mechanics
+	int future; //next move index
 
 	//token motion
 	int moves;
