@@ -151,9 +151,15 @@ int main()
             		cout << "a> ";
 			cin >> moves;
 			}
-			while(moves > midvec.size())
+			while(moves > (boardsize/2)+1)
 			{
-			cout << "Please enter a value less than "<<midvec.size()<<endl ;
+			cout << "Please enter a value less than "<<(boardsize/2)+1<<endl ;
+			cout << "a> ";
+			cin >> moves;
+			}
+			while(moves < 1)
+			{
+			cout << "Please enter a POSITIVE integer less than "<<(boardsize/2)+1<<endl ;
 			cout << "a> ";
 			cin >> moves;
 			}
@@ -171,9 +177,15 @@ int main()
             		cout << "b> ";
 			cin >> moves;
 			}
-			while(moves > midvec.size())
+			while(moves > (boardsize/2)+1)
 			{
-			cout << "Please enter a value less than "<<midvec.size()<<endl ;
+			cout << "Please enter a value less than "<<(boardsize/2)+1<<endl ;
+			cout << "b> ";
+			cin >> moves;
+			}
+			while(moves < 1)
+			{
+			cout << "Please enter a POSITIVE integer less than "<<(boardsize/2)+1<<endl ;
 			cout << "b> ";
 			cin >> moves;
 			}
