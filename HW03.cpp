@@ -132,7 +132,12 @@ int main()
 		moves--;
 		}
 		*/
-		if ((tplace + (2 * moves)) > (midvec.size() - 2)) {
+		if ((tplace + (2 * moves)) < 1){
+			midvec[tplace] = " ";
+			tplace = (((tplace + (2 * moves))*-1)+2);
+			midvec[tplace] = "@";	
+		}
+		else if ((tplace + (2 * moves)) > (midvec.size() - 2)) {
 			midvec[tplace] = " ";
 			tplace = tplace + ((2 * moves) - ((midvec.size() - 2) - tplace+2 ));
 			midvec[tplace] = "@";
