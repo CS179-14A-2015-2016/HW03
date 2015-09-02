@@ -131,6 +131,9 @@ int main()
 
 	//initiliaze winning tile
 	wintile = (boardsize * 2) - 1;
+	//intiliaze replacement outside loop
+	string curhold = "   ";
+	string futhold;
 
 	while (winner != 1)
 	{
@@ -150,20 +153,26 @@ int main()
 
 		//bounceback movement
 		if ((tplace + (2 * moves)) < 1) {
-			midvec[tplace] = "   ";
+			midvec[tplace] = curhold;
 			tplace = (((tplace + (2 * moves)) * -1) + 2);
+			futhold = midvec[tplace];
+			curhold = futhold;
 			midvec[tplace] = " @ ";
 		}
 		else if ((tplace + (2* moves)) > (midvec.size() - 2))
 		{
-			midvec[tplace] = "   ";
+			midvec[tplace] = curhold;
 			tplace = tplace + ((2 * moves) - ((midvec.size() - 2) - tplace + 2));
+			futhold = midvec[tplace];
+			curhold = futhold;
 			midvec[tplace] = " @ ";
 		}
 		else
 		{
-			midvec[tplace] = "   ";
+			midvec[tplace] = curhold;
 			tplace += (2 * moves);
+			futhold = midvec[tplace];
+			curhold = futhold;
 			midvec[tplace] = " @ ";
 		}
 
