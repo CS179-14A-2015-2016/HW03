@@ -21,8 +21,8 @@ int steprand(int& boardsize)
 	random_device ran;
 	mt19937 dev(ran());
 	uniform_int_distribution<> dis(-spaces, spaces);
-
-	return dis(dev);
+	int a = dis(dev);
+	return a;
 }
 
 //determines if a tile will have a random value or not
@@ -48,29 +48,29 @@ int main()
 	int boardsize;
 	int pbuffer; //pausebuffer
 	int winner = 0; //endcheck
-					//int tokenhold;
+	int tokenhold;
 	int tplace = 1;
 	int wintile;
-	//	int endtile;
+	int endtile;
 
 	//token motion
 	int moves;
 	bool player = true;
-	//	int randomValue = 0;
+	int randomValue = 0;
 
 	//boardsize input
 	cout << "Please enter the number of cells... ";
 	cin >> boardsize;
 
 	//total board
-	vector<string> topvec = { "+", "-", "+" };
-	vector<string> midvec = { "|", " " ,"|" };
-	vector<string> botvec = { "+", "-", "+" };
+	vector<string> topvec = { "+", " - ", "+" };
+	vector<string> midvec = { "|", "   ", "|" };
+	vector<string> botvec = { "+", " - ", "+" };
 
 	//strings to add to the board
-	vector<string> totop = { "-", "+" };
-	vector<string> tomid = { " ", "|" };
-	vector<string> tobot = { "-", "+" };
+	vector<string> totop = { " - ", "+" };
+	vector<string> tomid = { "   ", "|" };
+	vector<string> tobot = { " - ", "+" };
 
 	//boardsize increase
 	topvec.reserve(topvec.size() + (totop.size()*boardsize));
@@ -84,38 +84,42 @@ int main()
 		midvec.insert(midvec.end(), tomid.begin(), tomid.end());
 		botvec.insert(botvec.end(), tobot.begin(), tobot.end());
 	}
-/*
+
 	int vecplace = 3;
 
 	for (int count2 = 0; count2 < boardsize-2; count2++)
 	{
 		int temp = static_cast <unsigned int>(steprand(boardsize)); //stores rand value
-		string strtemp = to_string(temp);
-		string strtemp2 = strtemp;
+		string strtemp1 = to_string(temp);
+		string strtemp2 = strtemp1;
+		string strtemp3 = strtemp1;
 
 		if (tilerand() == true)
 		{
-			if (strtemp.front() = '-')
+			if (strtemp1.front() = '-')
+			{
+				midvec[vecplace] = strtemp2 + ' ';
+			}
+			if (strtemp1.length() <= 1)
+			{
+				midvec[vecplace] = ' ' + strtemp2 + ' ';
+			}
+			if (strtemp1.length() >= 3)
 			{
 				midvec[vecplace] = strtemp2;
-			}
-			else
-			{
-				midvec[vecplace] = strtemp2.insert(0, 1, ' ');
 			}
 
 		}
 		else
 		{
-			midvec[vecplace] = "  ";
+			midvec[vecplace] = "   ";
 		}
 
 		vecplace += 2;
 	}
-*/
-	//inserts token to start
-	midvec[tplace] = " @";
 
+	//inserts token to start
+	midvec[tplace] = " @ ";
 
 	//prints the board
 	vprint(topvec);
@@ -131,52 +135,38 @@ int main()
 	while (winner != 1)
 	{
 		//input movement
-		if (player == true) {
-			cout << "Please enter number of tiles to move, Player 1: ";
+		if(player == true)
+		{
+			cout << "a> ";
 			cin >> moves;
 			player = false;
 		}
-		else {
-			cout << "Please enter number of tiles to move, Player 2: ";
+		else
+		{
+			cout << "b> ";
 			cin >> moves;
 			player = true;
 		}
 
-
-		/*while (moves != 0)
+		//bounceback movement
+		if ((tplace + (2 * moves)) < 1) {
+			midvec[tplace] = "   ";
+			tplace = (((tplace + (2 * moves)) * -1) + 2);
+			midvec[tplace] = " @ ";
+		}
+		else if ((tplace + (2* moves)) > (midvec.size() - 2))
 		{
-		midvec[tplace] = " ";
-		tplace += 2;
-
-		//bounceback condition
-
-		if ()
+			midvec[tplace] = "   ";
+			tplace = tplace + ((2 * moves) - ((midvec.size() - 2) - tplace + 2));
+			midvec[tplace] = " @ ";
+		}
+		else
 		{
-
-		}
-
-		//end of bounceback
-
-		midvec[tplace] = "@";
-		moves--;
-		}
-		*/
-		if ((tplace + (2 * moves)) < 1){
-			midvec[tplace] = " ";
-			tplace = (((tplace + (2 * moves))*-1)+2);
-			midvec[tplace] = "@";	
-		}
-		else if ((tplace + (2 * moves)) > (midvec.size() - 2)) {
-			midvec[tplace] = " ";
-			tplace = tplace + ((2 * moves) - ((midvec.size() - 2) - tplace+2 ));
-			//tplace = tplace + (((2*moves)+tplace-(midvec.size() - 2))/2)-1;
-			midvec[tplace] = "@";
-		}
-		else {
-			midvec[tplace] = " ";
+			midvec[tplace] = "   ";
 			tplace += (2 * moves);
-			midvec[tplace] = "@";
+			midvec[tplace] = " @ ";
 		}
+
 
 		//prints the board
 		vprint(topvec);
@@ -186,7 +176,7 @@ int main()
 		vprint(botvec);
 		cout << endl;
 
-		if (midvec.at(wintile) == "@")
+		if (midvec.at(wintile) == " @ ")
 		{
 			winner = 1;
 		}
@@ -199,11 +189,11 @@ int main()
 
 	if (player == false)
 	{
-		cout << "Player 1 wins.";
+		cout << "Player a wins.";
 	}
 	else
 	{
-		cout << "Player 2 wins.";
+		cout << "Player b wins.";
 	}
 
 	//pause buffer
@@ -241,4 +231,30 @@ randomValue = steprand(boardsize);
 else {
 randomValue = 0;
 }
+*/
+
+//psuedo move code
+/*
+while (moves != 0)
+{
+midvec[tplace] = " ";
+tplace += 2;
+
+//bounceback condition
+/*
+if ()
+{
+
+}
+
+//end of bounceback
+
+midvec[tplace] = "@";
+moves--;
+}
+
+
+midvec[tplace] = " ";
+tplace += (2 * moves);
+midvec[tplace] = "@";
 */
