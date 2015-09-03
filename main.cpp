@@ -11,19 +11,23 @@ int turn = 0;
 int tokenCell = 1;
 int endCell;
 int bounce;
-int hit;
+int moveCount;
 string lastMove;
 const string token="@";
 const string border="+-";
 const string cell="| ";
-bool outOfBounds = false;
+bool outOfBounds;
 
 
 void board()
 {
     if (turn == 0 || (minNum <= moves && moves <= maxNum))
     {
-        cout << tokenCell << endl;                                      /* REMOVE */
+        //cout << "orig tokenCell: " << tokenCell << endl;
+        if (!(turn ==0))
+        {
+            tokenCell = bounce;
+        }
         while (box < n) /* top border */
         {
             cout << border;
@@ -54,17 +58,8 @@ void board()
             }
             else
             {
-                
-                if (outOfBounds == true) /* bouncing */                             /* ISSUE?? */
+                if (outOfBounds == true) /* bouncing */
                 {
-                    if ((tokenCell + moves) > endCell)
-                    {
-                        tokenCell = endCell - bounce;
-                    }
-                    else if ((tokenCell + moves) <= 0)
-                    {
-                        tokenCell = bounce;
-                    }
                     do
                     {
                         cout << cell;
@@ -126,7 +121,7 @@ void board()
             if (box == (3*n))
             {
                 cout << "+" <<endl;
-                cout << tokenCell << "|" << bounce << "|" << moves <<endl;                     /*REMOVE!!*/
+                //cout << "new tokenCell: " << tokenCell << " bounce: " << bounce << " moves: " << moves <<endl;
             }
         }
     }
@@ -147,7 +142,7 @@ void playerTurn()
         cin >> moves;
         lastMove = "B";
     }
-
+    
 }
 
 void game()
@@ -163,23 +158,81 @@ void game()
     }
     else
     {
-        if (((tokenCell + moves) <= 0) || ((tokenCell + moves) > endCell))
+        if (((tokenCell + moves) < 1) || ((tokenCell + moves) > endCell))
         {
             outOfBounds = true;
-            if ((tokenCell + moves) > endCell)
+            moveCount = abs (moves);
+            bounce = tokenCell;
+            if (moves > 0)
             {
-                hit = abs ((tokenCell + moves) / endCell);
-                bounce = abs (((endCell - 1) * hit) - abs(tokenCell + moves) + 2);             /*ISSUE*/
+                //cout << "moveCount: " << moveCount << endl;
+                do
+                {
+                    do
+                    {
+                        bounce += 1;
+                        --moveCount;
+                        //cout << "1abounce: " << bounce << " moveCount:" << moveCount << endl;
+                    }while ((moveCount > 0) && (bounce < endCell));
+                    if (moveCount > 0)
+                    {
+                        do
+                        {
+                            bounce -= 1;
+                            --moveCount;
+                            //cout << "1bbounce: " << bounce << " moveCount:" << moveCount << endl;
+                        }while ((moveCount > 0) && (bounce == endCell));
+                    }
+                    if (moveCount > 0)
+                    {
+                        do
+                        {
+                            bounce -= 1;
+                            --moveCount;
+                            //cout << "1cbounce: " << bounce << " moveCount:" << moveCount << endl;
+                        }while ((moveCount > 0) && (bounce > 1));
+                    }
+                }while (moveCount > 0);
             }
-            else if ((tokenCell + moves) <= 0)
+            else if (moves < 1)
             {
-                hit = abs ((tokenCell + moves) / endCell);
-                bounce = abs (((endCell - 1) * hit) - abs(tokenCell + moves) + 2);             /*ISSUE*/
-           }
+                do
+                {
+                    if ((moveCount > 0) && (bounce == 1))
+                    {
+                        do
+                        {
+                            bounce += 1;
+                            --moveCount;
+                            //cout << "2abounce: " << bounce << " moveCount:" << moveCount << endl;
+                        } while ((moveCount > 0) && (bounce == 1));
+                    }
+                    if (moveCount > 0)
+                    {
+                        do
+                        {
+                            bounce += 1;
+                            --moveCount;
+                            //cout << "2bbounce: " << bounce << " moveCount:" << moveCount << endl;
+                        }while ((moveCount > 0) && (bounce < endCell));
+                    }
+                    if (moveCount > 0)
+                    {
+                        do
+                        {
+                            bounce -= 1;
+                            --moveCount;
+                            //cout << "2cbounce: " << bounce << " moveCount:" << moveCount << endl;
+                        }while ((moveCount > 0) && (bounce > 1));
+                    }
+                
+                }while (moveCount > 0);
+            }
+            //cout << "bounce: " << bounce << " moveCount:" << moveCount << endl;
         }
-        else if (outOfBounds == false || tokenCell != 0)
+        else
         {
-            tokenCell += moves;
+            bounce = tokenCell + moves;
         }
         board();
         ++turn;
@@ -249,16 +302,16 @@ int main()
                 }while(!win);
                 cout << "Player " << lastMove << " has won!!!" <<endl;
             }
-
-        }
             
+        }
+        
         do
         {
             cin >> x;
         }
         while (x == 3);
     }
-        
+    
     if (x == 3)
     {
         do
@@ -266,10 +319,10 @@ int main()
             cin >> x;
         }
         while (x == 3);
-            
+        
         system("pause");
     }
-        
+    
     
     
     return 0;
