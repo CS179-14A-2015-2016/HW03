@@ -62,7 +62,6 @@ int main()
 	//token motion
 	int moves;
 	bool player = true;
-	int randomValue = 0;
 
 	//boardsize input
 	cout << "Please enter the number of cells... ";
